@@ -1,7 +1,9 @@
 package com.bridgelabz.AddressBookApp.service;
 import com.bridgelabz.AddressBookApp.dto.AddressBookDTO;
+import com.bridgelabz.AddressBookApp.exception.AddressBookException;
 import com.bridgelabz.AddressBookApp.model.AddressBook;
 import com.bridgelabz.AddressBookApp.repository.AddressBookRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -37,43 +39,37 @@ public class AddressBookService {
         log.info("New contact added: {}", savedContact);
         return savedContact;
     }
-    public Optional<AddressBook> getContactById(Long id) {
+    public AddressBook getContactById(Long id) {
         log.info("Fetching contact with ID: {}", id);
         Optional<AddressBook> contact = addressBookRepository.findById(id);
-        if (contact.isPresent()) {
-            log.info("Contact found: {}", contact.get());
-        } else {
-            log.warn("Contact with ID {} not found", id);
+        if (!contact.isPresent()) {
+            throw new AddressBookException("Contact with ID " + id + " not found!");
         }
-        return contact;
+        return contact.get();
     }
-    public Optional<AddressBook> updateContact(Long id, AddressBookDTO dto) {
+    public AddressBook updateContact(Long id,@Valid AddressBookDTO dto) {
         log.info("Updating contact with ID: {}", id);
         Optional<AddressBook> contactOptional = addressBookRepository.findById(id);
-
-        if (contactOptional.isPresent()) {
-            AddressBook contact = contactOptional.get();
-            contact.setName(dto.getName());
-            contact.setPhone(dto.getPhone());
-            contact.setEmail(dto.getEmail());
-
-            AddressBook updatedContact = addressBookRepository.save(contact);
-            log.info("Updated contact: {}", updatedContact);
-            return Optional.of(updatedContact);
-        } else {
-            log.warn("Update failed - Contact with ID {} not found", id);
-            return Optional.empty();
+        if (!contactOptional.isPresent()) {
+            throw new AddressBookException("Cannot update! Contact with ID " + id + " not found!");
         }
+
+        AddressBook contact = contactOptional.get();
+        contact.setName(dto.getName());
+        contact.setPhone(dto.getPhone());
+        contact.setEmail(dto.getEmail());
+
+        return addressBookRepository.save(contact);
+
     }
     public boolean deleteContact(Long id) {
         log.info("Deleting contact with ID: {}", id);
-        if (addressBookRepository.existsById(id)) {
-            addressBookRepository.deleteById(id);
-            log.info("Contact with ID {} deleted successfully", id);
-            return true;
-        } else {
-            log.warn("Delete failed - Contact with ID {} not found", id);
-            return false;
+        Optional<AddressBook> contact = addressBookRepository.findById(id);
+        if (!contact.isPresent()) {
+            throw new AddressBookException("Cannot delete! Contact with ID " + id + " not found!");
+        }
+        addressBookRepository.deleteById(id);
+        log.info("Contact with ID {} deleted successfully", id);
+        return false;
         }
     }
-}

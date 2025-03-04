@@ -32,13 +32,8 @@ public class AddressBookController {
     @GetMapping("/{id}")
     public ResponseEntity<AddressBook> getContactById(@PathVariable Long id) {
         log.info("GET /addressbook/{} - Fetching contact from DB", id);
-        Optional<AddressBook> contactOptional = addressBookService.getContactById(id);
-        if (contactOptional.isPresent()) {
-            return ResponseEntity.ok(contactOptional.get());
-        } else {
-            log.warn("Contact with ID {} not found in DB", id);
-            return ResponseEntity.notFound().build();
-        }
+        AddressBook contact = addressBookService.getContactById(id);
+        return ResponseEntity.ok(contact);
     }
 
     @PostMapping
@@ -66,22 +61,14 @@ public class AddressBookController {
             return ResponseEntity.badRequest().body(errors);
         }
         log.info("Received request to update contact with ID: {}", id);
-        Optional<AddressBook> updatedContact = addressBookService.updateContact(id, dto);
-        if (updatedContact.isPresent()) {
-            return ResponseEntity.ok(updatedContact.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        AddressBook updatedContact = addressBookService.updateContact(id, dto);
+        return ResponseEntity.ok(updatedContact);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
         log.info("Received request to delete contact with ID: {}", id);
-        boolean isDeleted = addressBookService.deleteContact(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        addressBookService.deleteContact(id);
+        return ResponseEntity.noContent().build();
     }
 }
