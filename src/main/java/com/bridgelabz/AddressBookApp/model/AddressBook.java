@@ -1,16 +1,16 @@
 package com.bridgelabz.AddressBookApp.model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Table(name = "address_book")
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonPropertyOrder({"id", "name", "phone", "email"})
 public class AddressBook {
 
@@ -21,10 +21,5 @@ public class AddressBook {
     private String phone;
     private String email;
 
-    public AddressBook(Long id, String name, String phone, String email) {
-        this.id=id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-    }
+
 }
