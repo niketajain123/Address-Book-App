@@ -29,4 +29,26 @@ public class AddressBookService {
         addressBookList.add(contact);
         return contact;
     }
+    public AddressBook getContactById(Long id) {
+        for (AddressBook contact : addressBookList) {
+            if (contact.getId().equals(id)) {
+                return contact;
+            }
+        }
+        return null;
+    }
+    public AddressBook updateContact(Long id, AddressBookDTO dto) {
+        for (AddressBook contact : addressBookList) {
+            if (contact.getId().equals(id)) {
+                contact.setName(dto.getName());
+                contact.setPhone(dto.getPhone());
+                contact.setEmail(dto.getEmail());
+                return contact;
+            }
+        }
+        return null;
+    }
+    public boolean deleteContact(Long id) {
+        return addressBookList.removeIf(contact -> contact.getId().equals(id));
+    }
 }
