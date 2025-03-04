@@ -1,12 +1,18 @@
 package com.bridgelabz.AddressBookApp.controller;
+
 import com.bridgelabz.AddressBookApp.dto.AddressBookDTO;
 import com.bridgelabz.AddressBookApp.model.AddressBook;
 import com.bridgelabz.AddressBookApp.service.AddressBookService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,34 +42,45 @@ public class AddressBookController {
     }
 
     @PostMapping
-        public ResponseEntity<AddressBook> addContact(@RequestBody AddressBookDTO dto) {
-        log.info("POST /addressbook - Adding new contact: {}", dto);
-        AddressBook newContact = addressBookService.addContact(dto);
-        log.info("New contact added successfully: {}", newContact);
-        return ResponseEntity.ok(newContact);
+        public ResponseEntity<?> addContact(@Valid @RequestBody AddressBookDTO dto, BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }
+        log.info("Received request to add new contact: {}", dto);
+        AddressBook savedContact = addressBookService.addContact(dto);
+        return ResponseEntity.ok(savedContact);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressBook> updateContact(@PathVariable Long id, @RequestBody AddressBookDTO dto) {
-        log.info("PUT /addressbook/{} - Updating contact in DB: {}", id, dto);
-        Optional<AddressBook> updatedContactOptional = addressBookService.updateContact(id, dto);
-        if (updatedContactOptional.isPresent()) {
-            return ResponseEntity.ok(updatedContactOptional.get());
+    public ResponseEntity<?> updateContact(@PathVariable Long id, @Valid @RequestBody AddressBookDTO dto, BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : result.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return ResponseEntity.badRequest().body(errors);
+        }
+        log.info("Received request to update contact with ID: {}", id);
+        Optional<AddressBook> updatedContact = addressBookService.updateContact(id, dto);
+        if (updatedContact.isPresent()) {
+            return ResponseEntity.ok(updatedContact.get());
         } else {
-            log.warn("Update failed - Contact with ID {} not found in DB", id);
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteContact(@PathVariable Long id) {
-        boolean deleted = addressBookService.deleteContact(id);
-        if (deleted) {
-            log.info("Contact with ID {} deleted successfully", id);
-            return ResponseEntity.ok("Deleted Successfully");
+    public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
+        log.info("Received request to delete contact with ID: {}", id);
+        boolean isDeleted = addressBookService.deleteContact(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
         } else {
-            log.warn("Delete failed - Contact with ID {} not found", id);
             return ResponseEntity.notFound().build();
         }
     }

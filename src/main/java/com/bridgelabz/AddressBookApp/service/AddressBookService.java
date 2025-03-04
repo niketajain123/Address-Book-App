@@ -4,6 +4,7 @@ import com.bridgelabz.AddressBookApp.model.AddressBook;
 import com.bridgelabz.AddressBookApp.repository.AddressBookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@Validated
 public class AddressBookService {
 
     private final AddressBookRepository addressBookRepository;
@@ -65,9 +67,7 @@ public class AddressBookService {
     }
     public boolean deleteContact(Long id) {
         log.info("Deleting contact with ID: {}", id);
-        Optional<AddressBook> contactOptional = addressBookRepository.findById(id);
-
-        if (contactOptional.isPresent()) {
+        if (addressBookRepository.existsById(id)) {
             addressBookRepository.deleteById(id);
             log.info("Contact with ID {} deleted successfully", id);
             return true;
