@@ -1,0 +1,45 @@
+2025-03-04 11:32:52 [restartedMain] INFO  c.b.A.AddressBookAppApplication - Starting AddressBookAppApplication using Java 17.0.6 with PID 18392 (D:\BridgeLabzClassroom\AddressBookApp\target\classes started by dell in D:\BridgeLabzClassroom\AddressBookApp)
+2025-03-04 11:32:52 [restartedMain] INFO  c.b.A.AddressBookAppApplication - The following 1 profile is active: "dev"
+2025-03-04 11:32:52 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-04 11:32:52 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-04 11:32:55 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-03-04 11:32:55 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-04 11:32:55 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-04 11:32:55 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-03-04 11:32:55 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2508 ms
+2025-03-04 11:32:55 [restartedMain] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-03-04 11:32:56 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-03-04 11:32:56 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-03-04 11:32:56 [restartedMain] INFO  c.b.A.AddressBookAppApplication - Started AddressBookAppApplication in 4.645 seconds (process running for 5.542)
+2025-03-04 11:32:56 [restartedMain] INFO  c.b.A.AddressBookAppApplication - Application is started...
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  c.b.A.c.AddressBookController - POST /addressbook - Adding new contact: AddressBookDTO(name=Nidhi Jain, phone=9917428401, email=nidhii123@gmail.com)
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  c.b.A.service.AddressBookService - New contact added: com.bridgelabz.AddressBookApp.model.AddressBook@cab93fb
+2025-03-04 11:33:19 [http-nio-8080-exec-1] INFO  c.b.A.c.AddressBookController - New contact added successfully: com.bridgelabz.AddressBookApp.model.AddressBook@cab93fb
+2025-03-04 11:33:38 [http-nio-8080-exec-3] INFO  c.b.A.c.AddressBookController - POST /addressbook - Adding new contact: AddressBookDTO(name=Niketa Jain, phone=7668368189, email=niketai123@gmail.com)
+2025-03-04 11:33:38 [http-nio-8080-exec-3] INFO  c.b.A.service.AddressBookService - New contact added: com.bridgelabz.AddressBookApp.model.AddressBook@592709d5
+2025-03-04 11:33:38 [http-nio-8080-exec-3] INFO  c.b.A.c.AddressBookController - New contact added successfully: com.bridgelabz.AddressBookApp.model.AddressBook@592709d5
+2025-03-04 11:34:05 [http-nio-8080-exec-4] INFO  c.b.A.c.AddressBookController - POST /addressbook - Adding new contact: AddressBookDTO(name=Srashti Jain, phone=8827174154, email=srashti123@gmail.com)
+2025-03-04 11:34:05 [http-nio-8080-exec-4] INFO  c.b.A.service.AddressBookService - New contact added: com.bridgelabz.AddressBookApp.model.AddressBook@4decc8df
+2025-03-04 11:34:05 [http-nio-8080-exec-4] INFO  c.b.A.c.AddressBookController - New contact added successfully: com.bridgelabz.AddressBookApp.model.AddressBook@4decc8df
+2025-03-04 11:34:11 [http-nio-8080-exec-5] INFO  c.b.A.c.AddressBookController - GET /addressbook - Fetching all contacts
+2025-03-04 11:34:11 [http-nio-8080-exec-5] INFO  c.b.A.service.AddressBookService - Fetching all contacts, total count: 3
+2025-03-04 11:34:29 [http-nio-8080-exec-6] INFO  c.b.A.c.AddressBookController - GET /addressbook/2 - Fetching contact
+2025-03-04 11:34:29 [http-nio-8080-exec-6] INFO  c.b.A.service.AddressBookService - Fetching contact with ID: 2
+2025-03-04 11:34:29 [http-nio-8080-exec-6] INFO  c.b.A.service.AddressBookService - Fetching contact with ID: 2
+2025-03-04 11:34:29 [http-nio-8080-exec-6] INFO  c.b.A.c.AddressBookController - Contact found: com.bridgelabz.AddressBookApp.model.AddressBook@592709d5
+2025-03-04 11:34:42 [http-nio-8080-exec-7] INFO  c.b.A.service.AddressBookService - Deleting contact with ID: 2
+2025-03-04 11:34:42 [http-nio-8080-exec-7] INFO  c.b.A.service.AddressBookService - Contact with ID 2 deleted successfully
+2025-03-04 11:34:42 [http-nio-8080-exec-7] INFO  c.b.A.c.AddressBookController - Contact with ID 2 deleted successfully
+2025-03-04 11:34:50 [http-nio-8080-exec-8] INFO  c.b.A.c.AddressBookController - GET /addressbook - Fetching all contacts
+2025-03-04 11:34:50 [http-nio-8080-exec-8] INFO  c.b.A.service.AddressBookService - Fetching all contacts, total count: 2
+2025-03-04 11:35:22 [http-nio-8080-exec-9] INFO  c.b.A.c.AddressBookController - PUT /addressbook/1 - Updating contact: AddressBookDTO(name=Nidhi Jain, phone=9917428401, email=nidhi123@gmail.com)
+2025-03-04 11:35:22 [http-nio-8080-exec-9] INFO  c.b.A.service.AddressBookService - Updating contact with ID: 1
+2025-03-04 11:35:22 [http-nio-8080-exec-9] INFO  c.b.A.service.AddressBookService - Updated contact: com.bridgelabz.AddressBookApp.model.AddressBook@cab93fb
+2025-03-04 11:35:22 [http-nio-8080-exec-9] INFO  c.b.A.c.AddressBookController - Contact updated successfully: com.bridgelabz.AddressBookApp.model.AddressBook@cab93fb
+2025-03-04 11:35:31 [http-nio-8080-exec-10] INFO  c.b.A.c.AddressBookController - GET /addressbook - Fetching all contacts
+2025-03-04 11:35:31 [http-nio-8080-exec-10] INFO  c.b.A.service.AddressBookService - Fetching all contacts, total count: 2
+2025-03-04 11:36:09 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-04 11:36:10 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
