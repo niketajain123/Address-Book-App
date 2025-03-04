@@ -21,7 +21,7 @@ public class AddressBook {
     private String phone;
     private String email;
 
-    public AddressBook(String name, String phone, String email) {
+    public AddressBook(Long aLong, String name, String phone, String email) {
         this.id=id;
         this.name = name;
         this.phone = phone;
